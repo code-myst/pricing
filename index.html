@@ -1,337 +1,543 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rakibul Haque Bhuiyan | Web Developer & Digital Architect</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        neon: '#00f3ff',
-                        dark: '#0a0a0a',
-                        card: '#111111',
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; }
-        .glow { text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); }
-        .card-glow:hover { box-shadow: 0 0 20px rgba(0, 243, 255, 0.15); border-color: #00f3ff; }
-        .btn-glow { transition: all 0.3s ease; }
-        .btn-glow:hover { box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); transform: translateY(-2px); }
-        .tab-active { border-color: #00f3ff; color: #00f3ff; background: rgba(0, 243, 255, 0.05); }
-        .tab-content { display: none; }
-        .tab-content.active { display: grid; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rakibul Haque Bhuiyan — Web Developer & Digital Architect · CODEMYST</title>
+<meta name="description" content="ওয়েবসাইট, মোবাইল/ডেস্কটপ অ্যাপ, AI অটোমেশন ও AI এজেন্ট — ব্যবসার বৃদ্ধির জন্য। ফ্রি ১ পেজের সাইট দিয়ে শুরু, ঝুঁকি শূন্য।">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%238b5cf6'/%3E%3Ctext x='16' y='22' font-size='16' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { sans: ['Geist', 'Hind Siliguri', 'system-ui', 'sans-serif'] },
+    colors: {
+      border: 'hsl(var(--border))', background: 'hsl(var(--background))', foreground: 'hsl(var(--foreground))',
+      card: 'hsl(var(--card))', primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+      secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+      muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+      success: 'hsl(var(--success))'
+    },
+    borderRadius: { lg: 'var(--radius)', md: 'calc(var(--radius) - 2px)' }
+  } }
+}
+</script>
+<style type="text/tailwindcss">
+@layer base {
+  :root{--background:240 10% 4%;--foreground:0 0% 98%;--card:240 8% 6%;--primary:258 90% 66%;--primary-foreground:0 0% 100%;--secondary:240 6% 12%;--secondary-foreground:0 0% 98%;--muted:240 6% 12%;--muted-foreground:240 5% 64%;--success:152 76% 40%;--border:240 6% 14%;--radius:.75rem}
+  *{@apply border-border}
+  html{color-scheme:dark;scroll-behavior:smooth;scroll-padding-top:4.5rem}
+  body{@apply bg-background text-foreground antialiased min-h-screen;
+    background-image:radial-gradient(ellipse 80% 50% at 20% -10%,hsl(258 90% 66%/.12),transparent),radial-gradient(ellipse 60% 40% at 90% 10%,hsl(199 89% 48%/.08),transparent),radial-gradient(ellipse 50% 50% at 50% 110%,hsl(258 90% 66%/.07),transparent);
+    background-attachment:fixed}
+  ::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{@apply rounded-full bg-white/10 hover:bg-white/20}
+  ::selection{@apply bg-primary/30 text-foreground}
+}
+@layer components {
+  .glass{@apply border border-white/10 bg-white/[0.03] backdrop-blur-xl}
+  .glass-hover{@apply transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]}
+  .card-sheen{position:relative}
+  .card-sheen::before{content:"";@apply pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent}
+  .text-gradient{@apply bg-gradient-to-r from-violet-400 via-fuchsia-300 to-violet-400 bg-clip-text text-transparent}
+  .dot-grid{background-image:radial-gradient(circle at 1px 1px,hsl(0 0% 100%/.07) 1px,transparent 0);background-size:24px 24px}
+  .card{@apply rounded-lg border bg-card text-foreground}
+  .btn{@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary}
+  .btn-lg{@apply h-11 px-6}.btn-sm{@apply h-9 px-3}
+  .btn-primary{@apply bg-primary text-primary-foreground hover:bg-primary/90}
+  .btn-outline{@apply border border-white/15 bg-transparent hover:bg-white/10}
+  .btn-ghost{@apply hover:bg-white/10}
+  .badge{@apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold}
+  .badge-success{@apply border-success/30 bg-success/15 text-emerald-300}
+  .badge-sec{@apply border-transparent bg-secondary text-secondary-foreground}
+  .badge-violet{@apply border-violet-500/30 bg-violet-500/15 text-violet-300}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+  .ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  /* Tabs (adapted to violet theme) */
+  .tab-btn{@apply px-5 py-2 border rounded-md text-sm font-semibold transition}
+  .tab-inactive{@apply border-white/10 bg-white/[0.02] text-muted-foreground hover:border-white/20 hover:text-foreground}
+  .tab-active{@apply border-violet-500/60 bg-violet-500/10 text-violet-200 shadow-[0_0_20px_-5px_rgba(139,92,246,0.4)]}
+  .tab-content{display:none}
+  .tab-content.active{display:grid}
+  /* FAQ */
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
 </head>
-<body class="overflow-x-hidden">
+<body class="font-sans">
+<div class="flex min-h-screen flex-col">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 bg-dark/80 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white">Rakibul<span class="text-neon glow">.</span></a>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
-                <a href="#home" class="hover:text-neon transition">হোম</a>
-                <a href="#why-me" class="hover:text-neon transition">কেন আমি</a>
-                <a href="#pricing" class="hover:text-neon transition">সার্ভিস ও প্রাইসিং</a>
-                <a href="#faq" class="hover:text-neon transition">প্রশ্ন-উত্তর</a>
-            </div>
-            <a href="https://wa.me/8801752845182?text=হাই%20রাকিবুল,%20আমি%20একটি%20ওয়েবসাইট%20বানাতে%20চাই" target="_blank" class="bg-neon text-dark px-5 py-2 rounded-md font-semibold btn-glow text-sm">WhatsApp</a>
-        </div>
+<!-- Navbar (theme: index 8) -->
+<header class="sticky top-0 z-40 border-b border-white/10 bg-background/60 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
+    <a class="flex items-center gap-3" href="#top">
+      <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/20 text-violet-300 ring-1 ring-primary/40">
+        <svg class="ico h-5 w-5" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+      </div>
+      <div class="hidden sm:block">
+        <p class="text-sm font-bold tracking-tight">Rakibul Haque Bhuiyan</p>
+        <p class="text-[10px] uppercase tracking-widest text-muted-foreground">CODEMYST</p>
+      </div>
+    </a>
+    <nav id="nav" class="ml-auto hidden items-center gap-1 md:flex">
+      <a href="#home" class="btn btn-ghost btn-sm text-muted-foreground hover:text-foreground">হোম</a>
+      <a href="#why-me" class="btn btn-ghost btn-sm text-muted-foreground hover:text-foreground">কেন আমি</a>
+      <a href="#pricing" class="btn btn-ghost btn-sm text-muted-foreground hover:text-foreground">সার্ভিস ও প্রাইসিং</a>
+      <a href="#faq" class="btn btn-ghost btn-sm text-muted-foreground hover:text-foreground">প্রশ্ন-উত্তর</a>
     </nav>
+    <div class="ml-auto flex items-center gap-2 md:ml-2">
+      <a href="https://wa.me/8801752845182?text=হাই%20রাকিবুল,%20আমি%20একটি%20ওয়েবসাইট%20বানাতে%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-sm">
+        <svg class="ico h-4 w-4" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="hidden sm:inline">WhatsApp</span>
+      </a>
+      <button id="menuBtn" class="btn btn-ghost btn-sm md:hidden" aria-label="Menu">
+        <svg class="ico h-5 w-5" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav id="navM" class="hidden flex-col gap-1 border-t border-white/10 px-4 py-3 md:hidden">
+    <a href="#home" class="btn btn-ghost btn-sm justify-start">হোম</a>
+    <a href="#why-me" class="btn btn-ghost btn-sm justify-start">কেন আমি</a>
+    <a href="#pricing" class="btn btn-ghost btn-sm justify-start">সার্ভিস ও প্রাইসিং</a>
+    <a href="#faq" class="btn btn-ghost btn-sm justify-start">প্রশ্ন-উত্তর</a>
+  </nav>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#00f3ff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="text-center z-10 max-w-3xl mx-auto">
-            <p class="text-neon font-medium mb-4 tracking-widest uppercase text-sm">Web Developer & Digital Architect</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">আপনার ব্যবসার <br><span class="text-neon glow">ডিজিটাল ঠিকানা,</span> <br>একদম ফ্রিতে!</h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">ফেসবুক পেজ হলো ভাড়া করা দোকান, যেকোনো সময় বন্ধ হতে পারে। ওয়েবসাইট হলো নিজের জায়গা। শুরুতে ১ পেজের সাইট ফ্রিতে চালু করে দিই, পছন্দ হলে বাড়ান।</p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="https://wa.me/8801752845182?text=আমি%20ফ্রি%20স্টার্টার%20প্ল্যানে%20সাইট%20বানাতে%20চাই" target="_blank" class="bg-neon text-dark px-8 py-4 rounded-lg font-bold text-lg btn-glow">নিজের সাইট ফ্রিতে শুরু করুন</a>
-                <a href="#pricing" class="border border-neon text-neon px-8 py-4 rounded-lg font-bold text-lg btn-glow hover:bg-neon/10">নমুনা ও প্রাইসিং দেখুন</a>
-            </div>
+<main id="top" class="flex-1">
+
+<!-- Hero (index 9 content, index 8 style) -->
+<section id="home" class="dot-grid relative overflow-hidden">
+  <div class="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl"></div>
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 text-center relative">
+    <div class="reveal mx-auto max-w-3xl">
+      <span class="badge badge-success gap-1.5">
+        <svg class="ico h-3 w-3" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/></svg>
+        Web Developer & Digital Architect
+      </span>
+      <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
+        আপনার ব্যবসার
+        <span class="text-gradient">ডিজিটাল ঠিকানা,</span>
+        একদম ফ্রিতে!
+      </h1>
+      <p class="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
+        ফেসবুক পেজ হলো ভাড়া করা দোকান, যেকোনো সময় বন্ধ হতে পারে। ওয়েবসাইট হলো নিজের জায়গা। শুরুতে ১ পেজের সাইট ফ্রিতে চালু করে দিই, পছন্দ হলে বাড়ান।
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="https://wa.me/8801752845182?text=আমি%20ফ্রি%20স্টার্টার%20প্ল্যানে%20সাইট%20বানাতে%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg">
+          নিজের সাইট ফ্রিতে শুরু করুন
+          <svg class="ico h-4 w-4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#pricing" class="btn btn-outline btn-lg">নমুনা ও প্রাইসিং দেখুন</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section class="border-y border-white/10 bg-white/[0.02]">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-10 sm:px-6 lg:grid-cols-4">
+    <div class="reveal text-center"><p class="text-gradient text-3xl font-extrabold sm:text-4xl">50+</p><p class="mt-1 text-xs text-muted-foreground sm:text-sm">প্রজেক্ট ডেলিভারি</p></div>
+    <div class="reveal text-center"><p class="text-gradient text-3xl font-extrabold sm:text-4xl">40+</p><p class="mt-1 text-xs text-muted-foreground sm:text-sm">সন্তুষ্ট ক্লায়েন্ট</p></div>
+    <div class="reveal text-center"><p class="text-gradient text-3xl font-extrabold sm:text-4xl">12-18h</p><p class="mt-1 text-xs text-muted-foreground sm:text-sm">লাইভ টাইম</p></div>
+    <div class="reveal text-center"><p class="text-gradient text-3xl font-extrabold sm:text-4xl">7d</p><p class="mt-1 text-xs text-muted-foreground sm:text-sm">ফ্রি বাগ ফিক্স</p></div>
+  </div>
+</section>
+
+<!-- Why Website & Why Me -->
+<section id="why-me" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+  <div class="reveal mb-12 text-center sm:mb-16">
+    <h2 class="text-2xl font-extrabold tracking-tight sm:text-4xl">
+      ওয়েবসাইট কেন দরকার? <span class="text-gradient">& কেন আমার থেকে বানাবেন?</span>
+    </h2>
+    <p class="mt-3 text-sm text-muted-foreground sm:text-base">প্রযুক্তির কথা নয়, ক্লায়েন্টের লাভের কথা বলি। আর ফ্রিতে শুরু করার ঝুঁকি শূন্য।</p>
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+    <!-- Why Website -->
+    <div class="reveal">
+      <div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-2xl font-bold">ওয়েবসাইট কেন দরকার?</h3>
+        <div class="mt-6 space-y-5">
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🏠</div>
+            <div><h4 class="font-semibold">নিজের দোকান</h4><p class="mt-1 text-sm text-muted-foreground">ফেসবুক পেজ হলো ভাড়া করা দোকান, যেকোনো সময় বন্ধ হতে পারে। ওয়েবসাইট হলো নিজের জায়গা।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🕦</div>
+            <div><h4 class="font-semibold">২৪ ঘণ্টা খোলা</h4><p class="mt-1 text-sm text-muted-foreground">আপনার দোকান রাত ১০টায় বন্ধ, কিন্তু ওয়েবসাইট রাত ২টাতেও কাস্টমারকে তথ্য দেয়।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🤝</div>
+            <div><h4 class="font-semibold">বিশ্বাস তৈরি</h4><p class="mt-1 text-sm text-muted-foreground">ওয়েবসাইট থাকলে মানুষ ভাবে এটা বড় ও আসল প্রতিষ্ঠান।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🔍</div>
+            <div><h4 class="font-semibold">Google এ আসা</h4><p class="mt-1 text-sm text-muted-foreground">কেউ Google এ আপনার এলাকার দোকান খুঁজলে আপনার নাম আসবে।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🔗</div>
+            <div><h4 class="font-semibold">একটা লিংকেই সব</h4><p class="mt-1 text-sm text-muted-foreground">প্রতিবার ছবি, দাম, ঠিকানা পাঠাতে হবে না, শুধু একটা লিংক দিলেই হবে।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">💬</div>
+            <div><h4 class="font-semibold">WhatsApp এ সরাসরি অর্ডার</h4><p class="mt-1 text-sm text-muted-foreground">কাস্টমার এক ক্লিকে আপনাকে মেসেজ দিতে পারবে।</p></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Why Website & Why Me Section -->
-    <section id="why-me" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">ওয়েবসাইট কেন দরকার? <span class="text-neon glow">& কেন আমার থেকে বানাবেন?</span></h2>
-            <p class="text-gray-400">প্রযুক্তির কথা নয়, ক্লায়েন্টের লাভের কথা বলি। আর ফ্রিতে শুরু করার ঝুঁকি শূন্য।</p>
+    <!-- Why Me -->
+    <div class="reveal">
+      <div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-2xl font-bold">কেন আমার থেকে বানাবেন?</h3>
+        <div class="mt-6 space-y-5">
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🎯</div>
+            <div><h4 class="font-semibold">ফ্রিতে শুরু</h4><p class="mt-1 text-sm text-muted-foreground">ঝুঁকি না নিয়েই ১ পেজের সাইট ফ্রিতে চালু করে দিই। পছন্দ হলে বাড়ান।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🛠️</div>
+            <div><h4 class="font-semibold">ডাইরেক্ট কমিউনিকেশন</h4><p class="mt-1 text-sm text-muted-foreground">এজেন্সি নয়, সরাসরি ডেভেলপারের সাথে কাজ। তাই দাম সাধ্যের মধ্যে এবং কাজ দ্রুত।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">⚡</div>
+            <div><h4 class="font-semibold">১২-১৮ ঘণ্টায় লাইভ</h4><p class="mt-1 text-sm text-muted-foreground">ছোট প্রজেক্ট নিমিষেই ডেলিভারি দিই।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">🛡️</div>
+            <div><h4 class="font-semibold">৭ দিন ফ্রি বাগ ফিক্স</h4><p class="mt-1 text-sm text-muted-foreground">কাজ শেষে পুরো ৭ দিন ফ্রি সাপোর্ট ও বাগ ফিক্স।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">📱</div>
+            <div><h4 class="font-semibold">সুপার রেস্পন্সিভ & PWA</h4><p class="mt-1 text-sm text-muted-foreground">মোবাইল, ট্যাবলেট সব ডিভাইসে পারফেক্টলি কাজ করবে।</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 text-xl">✨</div>
+            <div><h4 class="font-semibold">মডার্ন টেকনোলজি</h4><p class="mt-1 text-sm text-muted-foreground">Next.js, TypeScript দিয়ে ফাস্ট ও SEO ফ্রেন্ডলি সাইট বানাই।</p></div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="grid md:grid-cols-2 gap-12">
-            <!-- Why Website -->
-            <div class="bg-card p-8 rounded-xl border border-gray-800">
-                <h3 class="text-2xl font-bold mb-6 text-white">ওয়েবসাইট কেন দরকার?</h3>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🏠</span><div><h4 class="font-semibold">নিজের দোকান</h4><p class="text-gray-400 text-sm">ফেসবুক পেজ হলো ভাড়া করা দোকান, যেকোনো সময় বন্ধ হতে পারে। ওয়েবসাইট হলো নিজের জায়গা।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🕦</span><div><h4 class="font-semibold">২৪ ঘণ্টা খোলা</h4><p class="text-gray-400 text-sm">আপনার দোকান রাত ১০টায় বন্ধ, কিন্তু ওয়েবসাইট রাত ২টাতেও কাস্টমারকে তথ্য দেয়।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🤝</span><div><h4 class="font-semibold">বিশ্বাস তৈরি</h4><p class="text-gray-400 text-sm">ওয়েবসাইট থাকলে মানুষ ভাবে এটা বড় ও আসল প্রতিষ্ঠান।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🔍</span><div><h4 class="font-semibold">Google এ আসা</h4><p class="text-gray-400 text-sm">কেউ Google এ আপনার এলাকার দোকান খুঁজলে আপনার নাম আসবে।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🔗</span><div><h4 class="font-semibold">একটা লিংকেই সব</h4><p class="text-gray-400 text-sm">প্রতিবার ছবি, দাম, ঠিকানা পাঠাতে হবে না, শুধু একটা লিংক দিলেই হবে।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">💬</span><div><h4 class="font-semibold">WhatsApp এ সরাসরি অর্ডার</h4><p class="text-gray-400 text-sm">কাস্টমার এক ক্লিকে আপনাকে মেসেজ দিতে পারবে।</p></div></div>
-                </div>
-            </div>
+<!-- Pricing -->
+<section id="pricing" class="border-y border-white/10 bg-white/[0.02]">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="reveal mb-10 text-center sm:mb-12">
+      <h2 class="text-2xl font-extrabold tracking-tight sm:text-4xl">সার্ভিস ও <span class="text-gradient">মূল্য তালিকা</span></h2>
+      <p class="mt-3 text-sm text-muted-foreground sm:text-base">আপনার প্রয়োজন অনুযায়ী প্ল্যান বেছে নিন</p>
+    </div>
 
-            <!-- Why Me -->
-            <div class="bg-card p-8 rounded-xl border border-gray-800">
-                <h3 class="text-2xl font-bold mb-6 text-white">কেন আমার থেকে বানাবেন?</h3>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🎯</span><div><h4 class="font-semibold">ফ্রিতে শুরু</h4><p class="text-gray-400 text-sm">ঝুঁকি না নিয়েই ১ পেজের সাইট ফ্রিতে চালু করে দিই। পছন্দ হলে বাড়ান।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🛠️</span><div><h4 class="font-semibold">ডি�রেক্ট কমিউনিকেশন</h4><p class="text-gray-400 text-sm">এজেন্সি নয়, সরাসরি ডেভেলপারের সাথে কাজ। তাই দাম সাধ্যের মধ্যে এবং কাজ দ্রুত।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">⚡</span><div><h4 class="font-semibold">১২-১৮ ঘণ্টায় লাইভ</h4><p class="text-gray-400 text-sm">ছোট প্রজেক্ট নিমিষেই ডেলিভারি দিই।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">🛡️</span><div><h4 class="font-semibold">৭ দিন ফ্রি বাগ ফিক্স</h4><p class="text-gray-400 text-sm">কাজ শেষে পুরো ৭ দিন ফ্রি সাপোর্ট ও বাগ ফিক্স।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">📱</span><div><h4 class="font-semibold">সুপার রেস্পন্সিভ & PWA</h4><p class="text-gray-400 text-sm">মোবাইল, ট্যাবলেট সব ডিভাইসে পারফেক্টলি কাজ করবে।</p></div></div>
-                    <div class="flex items-start gap-4"><span class="text-neon text-2xl">✨</span><div><h4 class="font-semibold">মডার্ন টেকনোলজি</h4><p class="text-gray-400 text-sm">Next.js, TypeScript দিয়ে ফাস্ট ও SEO ফ্রেন্ডলি সাইট বানাই।</p></div></div>
-                </div>
-            </div>
+    <!-- Tabs -->
+    <div class="reveal mb-10 flex flex-wrap justify-center gap-3">
+      <button onclick="openTab('free')" id="btn-free" class="tab-btn tab-active">ফ্রি সার্ভিস</button>
+      <button onclick="openTab('personal')" id="btn-personal" class="tab-btn tab-inactive">Personal/Portfolio</button>
+      <button onclick="openTab('business')" id="btn-business" class="tab-btn tab-inactive">Business</button>
+      <button onclick="openTab('lms')" id="btn-lms" class="tab-btn tab-inactive">LMS & Blog</button>
+      <button onclick="openTab('support')" id="btn-support" class="tab-btn tab-inactive">Update & Support</button>
+    </div>
+
+    <!-- Free -->
+    <div id="free" class="tab-content active md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl relative overflow-hidden">
+        <span class="absolute top-0 right-0 bg-violet-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">FREE</span>
+        <h3 class="text-2xl font-bold">Starter Launch</h3>
+        <p class="text-4xl font-extrabold text-gradient my-4">৳০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8">
+          <li>✅ ১ পেজের সাইট (Landing/Digital Card)</li>
+          <li>✅ Contact Page</li>
+          <li>✅ Fast Reload & Super Responsive</li>
+          <li>✅ Free Subdomain & Animation</li>
+          <li>✅ WhatsApp/Call/Email বাটন</li>
+          <li>✅ Google Map & Social Link</li>
+          <li>⏱ ১২-১৮ ঘণ্টায় Live</li>
+          <li>🔄 ১ বার Revision</li>
+        </ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Starter%20Launch%20(Free)%20প্ল্যানে%20সাইট%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">ফ্রিতে শুরু করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-2xl font-bold">Partner Plan</h3>
+        <p class="text-4xl font-extrabold text-white my-4">Free <span class="text-lg text-muted-foreground">(২০% শেয়ার)</span></p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8">
+          <li>🎯 যাদের সাইট থেকে সরাসরি আয় হয়</li>
+          <li>🛒 Shop, LMS, Blog/News, Booking</li>
+          <li>🔐 সব order/payment admin panel এ</li>
+          <li>📊 আপনার dashboard access থাকবে</li>
+        </ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Partner%20Plan%20এ%20সাইট%20বানাতে%20চাই" target="_blank" rel="noreferrer" class="btn btn-outline btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+    </div>
+
+    <!-- Personal -->
+    <div id="personal" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Starter</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৫০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8">
+          <li>✅ ১–৩ পেজ</li>
+          <li>✅ Responsive</li>
+          <li>✅ Contact Form</li>
+          <li>✅ Domain Setup</li>
+        </ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Starter%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl relative border-violet-500/60">
+        <span class="absolute top-0 right-0 bg-violet-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</span>
+        <h3 class="text-xl font-bold mb-2">Standard</h3>
+        <p class="text-4xl font-extrabold text-gradient my-4">৳১,৫০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8">
+          <li>✅ ৫ পেজ</li>
+          <li>✅ নিজস্ব Domain Setup</li>
+          <li>✅ Animation & Gallery</li>
+        </ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Standard%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Premium</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৩,৫০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8">
+          <li>✅ Next.js, SEO, Animation</li>
+          <li>✅ Dark Mode & Admin Panel</li>
+          <li>✅ PWA & AI Integration</li>
+          <li>✅ Multi Language</li>
+        </ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Premium%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+    </div>
+
+    <!-- Business -->
+    <div id="business" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Starter</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৫০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ ৩ পেজ</li><li>✅ WhatsApp/Contact Button</li><li>✅ Domain Setup</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Business%20Starter%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl relative border-violet-500/60">
+        <span class="absolute top-0 right-0 bg-violet-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">BEST VALUE</span>
+        <h3 class="text-xl font-bold mb-2">Standard</h3>
+        <p class="text-4xl font-extrabold text-gradient my-4">৳৪,০০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ ৭ পেজ, Admin Panel</li><li>✅ Basic SEO & PWA</li><li>✅ Multi Language & Theme</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Business%20Standard%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Premium</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳১৫,০০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ ১৫ পেজ পর্যন্ত</li><li>✅ bKash/Nagad/SSLCommerz</li><li>✅ Next.js + TypeScript</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Business%20Premium%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+    </div>
+
+    <!-- LMS -->
+    <div id="lms" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">LMS Basic</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৮,০০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ ১ শিক্ষক/প্রতিষ্ঠান</li><li>✅ Course, Video/PDF</li><li>✅ Student Login</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20LMS%20Basic%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">LMS Standard</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳২০,০০০</p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ Quiz, Certificate</li><li>✅ Payment Gateway</li><li>✅ Progress Tracking</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20LMS%20Standard%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Blog / News Portal</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৫০০<span class="text-lg text-muted-foreground">/৫০০০+</span></p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ Admin Panel, SEO</li><li>✅ Multi-author, AdSense</li><li>✅ Breaking News, Category</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Blog/News%20প্ল্যান%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+    </div>
+
+    <!-- Support -->
+    <div id="support" class="tab-content md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Update Service</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳৩০০ <span class="text-lg text-muted-foreground">থেকে</span></p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ Content/Design পরিবর্তন</li><li>✅ নতুন পেজ, Bug fix</li><li>⚡ Pack: ৳১,০০০ = ৫টা ছোট কাজ</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Update%20Service%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+      <div class="reveal"><div class="card glass glass-hover card-sheen h-full p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-2">Maintenance</h3>
+        <p class="text-4xl font-extrabold text-white my-4">৳২০০ <span class="text-lg text-muted-foreground">/মাস</span></p>
+        <ul class="space-y-3 text-sm text-muted-foreground mb-8"><li>✅ Uptime Check</li><li>✅ মাসে ১-৪টা Update</li><li>✅ Backup & Priority Support (Standard ৳৮০০)</li></ul>
+        <a href="https://wa.me/8801752845182?text=আমি%20Maintenance%20Service%20চাই" target="_blank" rel="noreferrer" class="btn btn-primary btn-lg w-full">অর্ডার করুন</a>
+      </div></div>
+    </div>
+
+    <p class="reveal mt-8 text-center text-xs text-muted-foreground">* সব প্ল্যানে Domain ও Hosting এর খরচ ক্লায়েন্টের। অতিরিক্ত পেজ: প্রতি পেজ ৳২০০–৫০০।</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+  <div class="reveal mb-10 text-center sm:mb-12">
+    <h2 class="text-2xl font-extrabold tracking-tight sm:text-4xl">সাধারণ <span class="text-gradient">আপত্তি ও সমাধান</span></h2>
+  </div>
+  <div class="space-y-4">
+    <div class="reveal card glass glass-hover rounded-lg overflow-hidden">
+      <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-white/[0.03] transition" onclick="toggleFaq(this)">
+        <span class="font-semibold">"আমার তো ফেসবুক পেজ আছে"</span>
+        <span class="faq-icon text-violet-300 text-2xl font-bold">+</span>
+      </button>
+      <div class="faq-answer px-6 text-muted-foreground">
+        <p class="pb-6">ভালো, ওয়েবসাইট সেটার পরিপূরক। পেজ ভাড়া করা জায়গা, ওয়েবসাইট আপনার নিজের। দুটো মিলে কাস্টমার বেশি পায়।</p>
+      </div>
+    </div>
+    <div class="reveal card glass glass-hover rounded-lg overflow-hidden">
+      <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-white/[0.03] transition" onclick="toggleFaq(this)">
+        <span class="font-semibold">"অনেক টাকা লাগবে"</span>
+        <span class="faq-icon text-violet-300 text-2xl font-bold">+</span>
+      </button>
+      <div class="faq-answer px-6 text-muted-foreground">
+        <p class="pb-6">শুরুতে একটা ১ পেজের সাইট একদম ফ্রি চালু করে দেয়। পছন্দ হলে তারপর বাড়ান। কোনো ঝুঁকি নেই!</p>
+      </div>
+    </div>
+    <div class="reveal card glass glass-hover rounded-lg overflow-hidden">
+      <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-white/[0.03] transition" onclick="toggleFaq(this)">
+        <span class="font-semibold">"আমি কিছু বুঝি না"</span>
+        <span class="faq-icon text-violet-300 text-2xl font-bold">+</span>
+      </button>
+      <div class="faq-answer px-6 text-muted-foreground">
+        <p class="pb-6">আপনাকে কিছু বুঝতে হবে না, সব সেটআপ করে দেবে। আপনি শুধু ছবি আর ফোন নম্বর দেবেন।</p>
+      </div>
+    </div>
+    <div class="reveal card glass glass-hover rounded-lg overflow-hidden">
+      <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-white/[0.03] transition" onclick="toggleFaq(this)">
+        <span class="font-semibold">"দরকার নেই, এমনিতেই চলছে"</span>
+        <span class="faq-icon text-violet-300 text-2xl font-bold">+</span>
+      </button>
+      <div class="faq-answer px-6 text-muted-foreground">
+        <p class="pb-6">চলছে, আরও কাস্টমার পেলে ভালো না? ফ্রিতে একবার দেখেই নিন, ক্ষতি নেই।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="mx-auto max-w-6xl px-4 pb-20 pt-4 sm:px-6">
+  <div class="card card-sheen reveal glass relative overflow-hidden p-10 text-center">
+    <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-violet-500/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-fuchsia-500/15 blur-3xl"></div>
+    <h2 class="text-gradient text-2xl font-extrabold sm:text-3xl">প্রজেক্ট শুরু করতে প্রস্তুত?</h2>
+    <p class="mx-auto mt-2 max-w-md text-sm text-muted-foreground">ফ্রি ১ পেজের সাইট দিয়েই শুরু করুন — ঝুঁকি শূন্য।</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="#pricing" class="btn btn-primary btn-lg">প্রাইসিং দেখুন <svg class="ico h-4 w-4" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="https://wa.me/8801752845182?text=হাই%20রাকিবুল,%20আমি%20একটি%20ওয়েবসাইট%20বানাতে%20চাই" target="_blank" rel="noreferrer" class="btn btn-outline btn-lg">WhatsApp এ মেসেজ পাঠান</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer (theme: index 8) -->
+<footer class="border-t border-white/10 bg-black/20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/20 text-violet-300 ring-1 ring-primary/40">
+            <svg class="ico h-4 w-4" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+          </div>
+          <p class="font-bold">Rakibul Haque Bhuiyan</p>
         </div>
-    </section>
+        <p class="mt-3 max-w-xs text-xs leading-relaxed text-muted-foreground">Web Developer & Digital Architect · ওয়েবসাইট, মোবাইল/ডেস্কটপ অ্যাপ, AI অটোমেশন ও AI এজেন্ট — ব্যবসার বৃদ্ধির জন্য।</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-muted-foreground">পেজ</p>
+        <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li><a class="hover:text-foreground" href="#home">হোম</a></li>
+          <li><a class="hover:text-foreground" href="#why-me">কেন আমি</a></li>
+          <li><a class="hover:text-foreground" href="#pricing">সার্ভিস ও প্রাইসিং</a></li>
+          <li><a class="hover:text-foreground" href="#faq">প্রশ্ন-উত্তর</a></li>
+          <li><a class="hover:text-foreground" href="https://wa.me/8801752845182" target="_blank" rel="noreferrer">WhatsApp এ যোগাযোগ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-muted-foreground">সোশ্যাল</p>
+        <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+          <li><a class="hover:text-foreground" href="https://wa.me/8801752845182" target="_blank" rel="noreferrer">WhatsApp: 01752845182</a></li>
+          <li><a class="hover:text-foreground" href="https://www.linkedin.com/in/rakibul-haque-bhuiyan" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><a class="hover:text-foreground" href="https://github.com/code-myst" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a class="hover:text-foreground" href="https://facebook.com/rakibulhaquebd" target="_blank" rel="noreferrer">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-xs text-muted-foreground">
+      <p>© <span id="year"></span> Rakibul Haque Bhuiyan · CODEMYST</p>
+      <a class="flex items-center gap-1.5 underline-offset-4 hover:underline" href="#top">
+        <svg class="ico h-3 w-3" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17L17 7"/></svg>
+        উপরে যান
+      </a>
+    </div>
+  </div>
+</footer>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">সার্ভিস ও <span class="text-neon glow">মূল্য তালিকা</span></h2>
-            <p class="text-gray-400">আপনার প্রয়োজন অনুযায়ী প্ল্যান বেছে নিন</p>
-        </div>
+</div>
 
-        <!-- Tabs -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10">
-            <button onclick="openTab('free')" class="tab-btn tab-active px-5 py-2 border border-gray-700 rounded-lg text-sm font-semibold transition" id="btn-free">ফ্রি সার্ভিস</button>
-            <button onclick="openTab('personal')" class="tab-btn px-5 py-2 border border-gray-700 rounded-lg text-sm font-semibold text-gray-400 transition" id="btn-personal">Personal/Portfolio</button>
-            <button onclick="openTab('business')" class="tab-btn px-5 py-2 border border-gray-700 rounded-lg text-sm font-semibold text-gray-400 transition" id="btn-business">Business</button>
-            <button onclick="openTab('lms')" class="tab-btn px-5 py-2 border border-gray-700 rounded-lg text-sm font-semibold text-gray-400 transition" id="btn-lms">LMS & Blog</button>
-            <button onclick="openTab('support')" class="tab-btn px-5 py-2 border border-gray-700 rounded-lg text-sm font-semibold text-gray-400 transition" id="btn-support">Update & Support</button>
-        </div>
+<script>
+/* Tab system */
+function openTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.classList.remove('tab-active');
+    el.classList.add('tab-inactive');
+  });
+  const panel = document.getElementById(tabId);
+  if (panel) panel.classList.add('active');
+  const btn = document.getElementById('btn-' + tabId);
+  if (btn) {
+    btn.classList.add('tab-active');
+    btn.classList.remove('tab-inactive');
+  }
+}
 
-        <!-- Tab Contents -->
-        <!-- Free Tab -->
-        <div id="free" class="tab-content active md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all relative overflow-hidden">
-                <span class="absolute top-0 right-0 bg-neon text-dark text-xs font-bold px-3 py-1 rounded-bl-lg">FREE</span>
-                <h3 class="text-2xl font-bold mb-2">Starter Launch</h3>
-                <p class="text-4xl font-extrabold text-neon glow my-4">৳০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8">
-                    <li>✅ ১ পেজের সাইট (Landing/Digital Card)</li>
-                    <li>✅ Contact Page</li>
-                    <li>✅ Fast Reload & Super Responsive</li>
-                    <li>✅ Free Subdomain & Animation</li>
-                    <li>✅ WhatsApp/Call/Email বাটন</li>
-                    <li>✅ Google Map & Social Link</li>
-                    <li>⏱ ১২-১৮ ঘণ্টায় Live</li>
-                    <li>🔄 ১ বার Revision</li>
-                </ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Starter%20Launch%20(Free)%20প্ল্যানে%20সাইট%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">ফ্রিতে শুরু করুন</a>
-            </div>
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-2xl font-bold mb-2">Partner Plan</h3>
-                <p class="text-4xl font-extrabold text-white my-4">Free <span class="text-lg text-gray-400">(২০% শেয়ার)</span></p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8">
-                    <li>🎯 যাদের সাইট থেকে সরাসরি আয় হয়</li>
-                    <li>🛒 Shop, LMS, Blog/News, Booking</li>
-                    <li>🔐 সব order/payment admin panel এ</li>
-                    <li>📊 আপনার dashboard access থাকবে</li>
-                </ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Partner%20Plan%20এ%20সাইট%20বানাতে%20চাই" target="_blank" class="block text-center border border-neon text-neon py-3 rounded-lg font-bold btn-glow hover:bg-neon/10">অর্ডার করুন</a>
-            </div>
-        </div>
+/* FAQ accordion */
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+  document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = '0px');
+  document.querySelectorAll('.faq-icon').forEach(i => { i.innerText = '+'; });
+  if (!isOpen) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    if (icon) icon.innerText = '−';
+  }
+}
 
-        <!-- Personal Tab -->
-        <div id="personal" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <!-- Card 1 -->
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Starter</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৫০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8">
-                    <li>✅ ১–৩ পেজ</li>
-                    <li>✅ Responsive</li>
-                    <li>✅ Contact Form</li>
-                    <li>✅ Domain Setup</li>
-                </ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Starter%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <!-- Card 2 -->
-            <div class="bg-card border border-neon p-8 rounded-xl card-glow transition-all relative">
-                <span class="absolute top-0 right-0 bg-neon text-dark text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</span>
-                <h3 class="text-xl font-bold mb-2">Standard</h3>
-                <p class="text-4xl font-extrabold text-neon glow my-4">৳১,৫০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8">
-                    <li>✅ ৫ পেজ</li>
-                    <li>✅ নিজস্ব Domain Setup</li>
-                    <li>✅ Animation & Gallery</li>
-                </ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Standard%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <!-- Card 3 -->
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Premium</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৩,৫০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8">
-                    <li>✅ Next.js, SEO, Animation</li>
-                    <li>✅ Dark Mode & Admin Panel</li>
-                    <li>✅ PWA & AI Integration</li>
-                    <li>✅ Multi Language</li>
-                </ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Personal%20Premium%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-        </div>
+/* Mobile menu */
+document.getElementById('menuBtn').onclick = () => {
+  const m = document.getElementById('navM');
+  m.classList.toggle('hidden');
+  m.classList.toggle('flex');
+};
+document.getElementById('navM').onclick = (e) => {
+  if (e.target.tagName === 'A') {
+    const m = document.getElementById('navM');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  }
+};
 
-        <!-- Business Tab -->
-        <div id="business" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Starter</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৫০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ ৩ পেজ</li><li>✅ WhatsApp/Contact Button</li><li>✅ Domain Setup</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Business%20Starter%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <div class="bg-card border border-neon p-8 rounded-xl card-glow transition-all relative">
-                <span class="absolute top-0 right-0 bg-neon text-dark text-xs font-bold px-3 py-1 rounded-bl-lg">BEST VALUE</span>
-                <h3 class="text-xl font-bold mb-2">Standard</h3>
-                <p class="text-4xl font-extrabold text-neon glow my-4">৳৪,০০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ ৭ পেজ, Admin Panel</li><li>✅ Basic SEO & PWA</li><li>✅ Multi Language & Theme</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Business%20Standard%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Premium</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳১৫,০০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ ১৫ পেজ পর্যন্ত</li><li>✅ bKash/Nagad/SSLCommerz</li><li>✅ Next.js + TypeScript</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Business%20Premium%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-        </div>
+/* Year */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-        <!-- LMS & Blog Tab -->
-        <div id="lms" class="tab-content md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">LMS Basic</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৮,০০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ ১ শিক্ষক/প্রতিষ্ঠান</li><li>✅ Course, Video/PDF</li><li>✅ Student Login</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20LMS%20Basic%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">LMS Standard</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳২০,০০০</p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ Quiz, Certificate</li><li>✅ Payment Gateway</li><li>✅ Progress Tracking</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20LMS%20Standard%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Blog / News Portal</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৫০০<span class="text-lg text-gray-400">/৫০০০+</span></p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ Admin Panel, SEO</li><li>✅ Multi-author, AdSense</li><li>✅ Breaking News, Category</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Blog/News%20প্ল্যান%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-        </div>
-
-        <!-- Support Tab -->
-        <div id="support" class="tab-content md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Update Service</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳৩০০ <span class="text-lg text-gray-400">থেকে</span></p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ Content/Design পরিবর্তন</li><li>✅ নতুন পেজ, Bug fix</li><li>⚡ Pack: ৳১,০০০ = ৫টা ছোট কাজ</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Update%20Service%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-            <div class="bg-card border border-gray-800 p-8 rounded-xl card-glow transition-all">
-                <h3 class="text-xl font-bold mb-2">Maintenance</h3>
-                <p class="text-4xl font-extrabold text-white my-4">৳২০০ <span class="text-lg text-gray-400">/মাস</span></p>
-                <ul class="space-y-3 text-gray-300 text-sm mb-8"><li>✅ Uptime Check</li><li>✅ মাসে ১-৪টা Update</li><li>✅ Backup & Priority Support (Standard ৳৮০০)</li></ul>
-                <a href="https://wa.me/8801752845182?text=আমি%20Maintenance%20Service%20চাই" target="_blank" class="block text-center bg-neon text-dark py-3 rounded-lg font-bold btn-glow">অর্ডার করুন</a>
-            </div>
-        </div>
-        
-        <p class="text-center text-gray-500 text-sm mt-8">* সব প্ল্যানে Domain ও Hosting এর খরচ ক্লায়েন্টের। অতিরিক্ত পেজ: প্রতি পেজ ৳২০০–৫০০।</p>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6 max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">সাধারণ <span class="text-neon glow">আপত্তি ও সমাধান</span></h2>
-        </div>
-        <div class="space-y-4">
-            <div class="bg-card border border-gray-800 rounded-lg overflow-hidden">
-                <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-gray-800/50 transition" onclick="toggleFaq(this)">
-                    <span class="font-semibold">"আমার তো ফেসবুক পেজ আছে"</span><span class="text-neon text-2xl font-bold">+</span>
-                </button>
-                <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6 text-gray-400">
-                    <p class="pb-6">ভালো, ওয়েবসাইট সেটার পরিপূরক। পেজ ভাড়া করা জায়গা, ওয়েবসাইট আপনার নিজের। দুটো মিলে কাস্টমার বেশি পায়।</p>
-                </div>
-            </div>
-            <div class="bg-card border border-gray-800 rounded-lg overflow-hidden">
-                <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-gray-800/50 transition" onclick="toggleFaq(this)">
-                    <span class="font-semibold">"অনেক টাকা লাগবে"</span><span class="text-neon text-2xl font-bold">+</span>
-                </button>
-                <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6 text-gray-400">
-                    <p class="pb-6">শুরুতে একটা ১ পেজের সাইট একদম ফ্রি চালু করে দেয়। পছন্দ হলে তারপর বাড়ান। কোনো ঝুঁকি নেই!</p>
-                </div>
-            </div>
-            <div class="bg-card border border-gray-800 rounded-lg overflow-hidden">
-                <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-gray-800/50 transition" onclick="toggleFaq(this)">
-                    <span class="font-semibold">"আমি কিছু বুঝি না"</span><span class="text-neon text-2xl font-bold">+</span>
-                </button>
-                <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6 text-gray-400">
-                    <p class="pb-6">আপনাকে কিছু বুঝতে হবে না, সব সেটআপ করে দেবে। আপনি শুধু ছবি আর ফোন নম্বর দেবেন।</p>
-                </div>
-            </div>
-            <div class="bg-card border border-gray-800 rounded-lg overflow-hidden">
-                <button class="faq-btn w-full text-left p-6 flex justify-between items-center hover:bg-gray-800/50 transition" onclick="toggleFaq(this)">
-                    <span class="font-semibold">"দরকার নেই, এমনিতেই চলছে"</span><span class="text-neon text-2xl font-bold">+</span>
-                </button>
-                <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6 text-gray-400">
-                    <p class="pb-6">চলছে, আরও কাস্টমার পেলে ভালো না? ফ্রিতে একবার দেখেই নিন, ক্ষতি নেই।</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-800 py-12 px-6 text-center">
-        <h3 class="text-2xl font-bold mb-2">Rakibul Haque Bhuiyan<span class="text-neon glow">.</span></h3>
-        <p class="text-gray-400 mb-6">Web Developer & Digital Architect</p>
-        <div class="flex justify-center gap-6 mb-6">
-            <a href="https://wa.me/8801752845182" target="_blank" class="text-gray-400 hover:text-neon transition">WhatsApp: 01752845182</a>
-            <a href="https://www.linkedin.com/in/rakibul-haque-bhuiyan" target="_blank" class="text-gray-400 hover:text-neon transition">LinkedIn</a>
-        </div>
-        <p class="text-gray-600 text-sm">© 2024 Rakibul Haque Bhuiyan. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Tab System
-        function openTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('tab-active');
-                el.classList.add('text-gray-400');
-            });
-            document.getElementById(tabId).classList.add('active');
-            const btn = document.getElementById('btn-' + tabId);
-            btn.classList.add('tab-active');
-            btn.classList.remove('text-gray-400');
-        }
-
-        // FAQ Accordion
-        function toggleFaq(btn) {
-            const answer = btn.nextElementSibling;
-            const icon = btn.children[1];
-            const isOpen = answer.style.maxHeight;
-
-            // Close all
-            document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
-            document.querySelectorAll('.faq-btn span:last-child').forEach(i => i.innerText = '+');
-
-            if (!isOpen) {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                icon.innerText = '-';
-            }
-        }
-    </script>
+/* Reveal on scroll */
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: 0.1 });
+document.querySelectorAll('.reveal:not(.in)').forEach((el) => io.observe(el));
+</script>
 </body>
 </html>
